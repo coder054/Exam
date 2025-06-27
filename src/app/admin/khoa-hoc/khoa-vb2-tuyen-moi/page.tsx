@@ -3,9 +3,10 @@ import { getListApplicationKhoaHocVBTuyenMoi } from "~/server/actions/khoahoc.ac
 import DanhSachDuThi from "~/components/DanhSachDuThi";
 
 export default async function PageKhoaHocVB2TuyenMoi() {
+  const applications = await getListApplicationKhoaHocVBTuyenMoi();
   return (
     <DanhSachDuThi
-      fetchFn={getListApplicationKhoaHocVBTuyenMoi}
+      applications={applications}
       caption={"Danh sach du thi khoa hoc VB2 tuyen moi."}
     />
   );

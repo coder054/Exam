@@ -27,3 +27,47 @@ export async function getListApplicationKhoaHocVBTuyenMoi() {
 export async function getListApplicationKhoaHocD57TuyenHSTHPT() {
   return getApplications(2);
 }
+
+interface GetKetQuaThiFormState {
+  errors: {
+    message?: string;
+  };
+  data: any[];
+}
+
+export async function getKetQuaThi(
+  _formState: GetKetQuaThiFormState,
+  formData: FormData,
+): Promise<GetKetQuaThiFormState> {
+  const kyThiId = formData.get("kyThiId");
+  const sbd = formData.get("sbd");
+  // await new Promise((res) => setTimeout(res, 2000));
+  const thiSinh = await db.thiSinh.findFirst({
+    where: {
+      soBaoDanh: String(sbd),
+    },
+  });
+  if (!thiSinh) {
+    return {
+      errors: { message: "khong tim thay thi sinh" },
+      data: [],
+    };
+  }
+
+  const app = await db.application.findMany({
+    where: {
+      thiSinhId: thiSinh.id,
+      kyThiId: parseInt(String(kyThiId)),
+    },
+
+    include: {
+      candidate: true, // ThiSinh
+      kyThi: true, // KyThi
+    },
+  });
+
+  return {
+    errors: {},
+    data: app || [],
+  };
+}

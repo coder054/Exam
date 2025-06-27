@@ -10,15 +10,13 @@ import {
   TableRow,
 } from "~/components/ui/table";
 
-export default async function DanhSachDuThi({
-  fetchFn,
+export default function DanhSachDuThi({
   caption,
+  applications,
 }: {
-  fetchFn: () => Promise<TDanhSachDuThi>;
   caption: string;
+  applications: TDanhSachDuThi;
 }) {
-  const applications = await fetchFn();
-
   return (
     <>
       <Table>
@@ -59,7 +57,7 @@ export default async function DanhSachDuThi({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {applications.map((item) => (
+          {(applications || []).map((item) => (
             <TableRow key={item.id}>
               <TableCell className="border text-right">
                 {item.soThuTu}

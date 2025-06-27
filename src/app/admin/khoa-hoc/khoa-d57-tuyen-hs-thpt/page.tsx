@@ -3,9 +3,10 @@ import { getListApplicationKhoaHocD57TuyenHSTHPT } from "~/server/actions/khoaho
 import DanhSachDuThi from "~/components/DanhSachDuThi";
 
 export default async function PageKhoaD57TuyenHSTHPT() {
+  const applications = await getListApplicationKhoaHocD57TuyenHSTHPT();
   return (
     <DanhSachDuThi
-      fetchFn={getListApplicationKhoaHocD57TuyenHSTHPT}
+      applications={applications}
       caption={"Danh sach du thi khoa hoc D57 tuyen HS THPT."}
     />
   );
