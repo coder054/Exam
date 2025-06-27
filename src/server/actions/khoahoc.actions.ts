@@ -6,10 +6,10 @@ export type TDanhSachDuThi = Awaited<
   ReturnType<typeof getListApplicationKhoaHocVBTuyenMoi>
 >;
 
-export async function getListApplicationKhoaHocVBTuyenMoi() {
+async function getApplications(kyThiId: number) {
   const applications = await db.application.findMany({
     where: {
-      kyThiId: 1,
+      kyThiId,
     },
     include: {
       candidate: true, // ThiSinh
@@ -18,4 +18,12 @@ export async function getListApplicationKhoaHocVBTuyenMoi() {
   });
 
   return applications;
+}
+
+export async function getListApplicationKhoaHocVBTuyenMoi() {
+  return getApplications(1);
+}
+
+export async function getListApplicationKhoaHocD57TuyenHSTHPT() {
+  return getApplications(2);
 }

@@ -5,7 +5,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -13,15 +12,17 @@ import {
 
 export default async function DanhSachDuThi({
   fetchFn,
+  caption,
 }: {
   fetchFn: () => Promise<TDanhSachDuThi>;
+  caption: string;
 }) {
   const applications = await fetchFn();
 
   return (
     <>
       <Table>
-        <TableCaption>Danh sach du thi khoa hoc VB2 tuyen moi.</TableCaption>
+        <TableCaption>{caption}</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px] border text-right">STT</TableHead>
