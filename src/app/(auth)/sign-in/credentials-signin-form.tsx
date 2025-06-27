@@ -24,13 +24,12 @@ const CredentialsSignInForm = () => {
   };
   return (
     <form
-      onSubmit={async (e: any) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-
-        const formData = new FormData(e.target);
-        const email = String(formData.get("email")) || "";
-        const password = String(formData.get("password")) || "";
-
+        const form = e.currentTarget; // This is correctly typed as HTMLFormElement
+        const formData = new FormData(form);
+        const email = (formData.get("email") as string) || "";
+        const password = (formData.get("password") as string) || "";
         const { data, error } = await authClient.signIn.email(
           {
             /**

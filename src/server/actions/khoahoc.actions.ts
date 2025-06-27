@@ -39,8 +39,8 @@ export async function getKetQuaThi(
   _formState: GetKetQuaThiFormState,
   formData: FormData,
 ): Promise<GetKetQuaThiFormState> {
-  const kyThiId = formData.get("kyThiId");
-  const sbd = formData.get("sbd");
+  const kyThiId = formData.get("kyThiId") as string;
+  const sbd = formData.get("sbd") as string;
   // await new Promise((res) => setTimeout(res, 2000));
   const thiSinh = await db.thiSinh.findFirst({
     where: {

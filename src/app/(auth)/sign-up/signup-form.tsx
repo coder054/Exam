@@ -12,12 +12,7 @@ const SignUpForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const {
-    data: session,
-    isPending, //loading state
-    error, //error object
-    refetch, //refetch the session
-  } = authClient.useSession();
+  const { data: session } = authClient.useSession();
 
   const SignUpButton = () => {
     const { pending } = useFormStatus();
@@ -32,34 +27,22 @@ const SignUpForm = () => {
 
   return (
     <form
-      onSubmit={async (e: any) => {
+      onSubmit={async (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-        const name = String(formData.get("name")) || "";
-        const email = String(formData.get("email")) || "";
-        const password = String(formData.get("password")) || "";
+        const formData = new FormData(e.currentTarget);
+        const name = (formData.get("name") as string) || "";
+        const email = (formData.get("email") as string) || "";
+        const password = (formData.get("password") as string) || "";
 
-        const { data, error } = await authClient.signUp.email(
+        await authClient.signUp.email(
           {
             email, // user email address
             password, // user password -> min 8 characters by default
             name, // user display name
             callbackURL: "/dashboard", // A URL to redirect to after the user verifies their email (optional)
           },
-          {
-            onRequest: (ctx) => {
-              //show loading
-            },
-            onSuccess: (ctx) => {
-              //redirect to the dashboard or sign in page
-              console.log("aaa onsuccess", ctx);
-            },
-            onError: (ctx) => {
-              // display the error message
-              alert(ctx.error.message);
-            },
-          },
+          {},
         );
       }}
     >

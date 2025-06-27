@@ -71,7 +71,7 @@ export default function UserButton() {
             </Link>
           </DropdownMenuItem>
 
-          {(session?.user as any)?.role === "admin" && (
+          {(session?.user as any).role === "ADMIN" && (
             <DropdownMenuItem>
               <Link className="w-full" href={ROUTES.admin.overview}>
                 Admin
