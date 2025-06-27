@@ -7,8 +7,8 @@ export default function Header() {
   return (
     <header className="w-full border-b">
       <div className="mx-auto flex max-w-[1000px] justify-between">
-        <div className="flex-start">
-          <Link href="/" className="flex-start ml-4">
+        <div className="flex items-center">
+          <Link href="/" className="ml-4 flex">
             <Image
               src="/images/logo.png"
               alt={`${APP_NAME} logo`}
@@ -16,12 +16,14 @@ export default function Header() {
               width={48}
               priority={true}
             />
-            <span className="ml-3 hidden text-2xl font-bold lg:block">
+            <span className="ml-3 hidden text-2xl font-bold lg:flex lg:items-center lg:justify-center">
               {APP_NAME}
             </span>
           </Link>
         </div>
-        <UserButton />
+        <div className="hidden">
+          <UserButton />
+        </div>
       </div>
     </header>
   );
