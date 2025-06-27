@@ -34,5 +34,9 @@ export default function AuthGuardClient({ children }: { children: ReactNode }) {
     return null;
   }
 
+  if (role !== "ADMIN") {
+    return null;
+  }
+
   return <>{children}</>;
 }
