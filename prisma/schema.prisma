@@ -83,6 +83,7 @@ model Verification {
 model KyThi {
   id             Int         @id @default(autoincrement())
   ten           String
+  slug      String @unique
   mota    String
   namTuyenSinh   Int         // Năm tuyển sinh
   khoaTuyenSinh  String      // Khóa tuyển sinh

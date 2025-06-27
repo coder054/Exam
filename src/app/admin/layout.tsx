@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import UserButton from "~/components/user-button";
-import { APP_NAME } from "~/constants";
+import { APP_NAME, ROUTES } from "~/constants";
 
 export default async function AdminLayout({
   children,
@@ -13,7 +13,7 @@ export default async function AdminLayout({
       <div className="flex flex-col">
         <div className="container mx-auto border-b">
           <div className="flex h-16 items-center px-4">
-            <Link href="/" className="w-22">
+            <Link href={ROUTES.admin.overview} className="w-22">
               <Image
                 src="/images/logo.png"
                 width={48}

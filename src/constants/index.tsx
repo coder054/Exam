@@ -19,5 +19,7 @@ export const ROUTES = {
   home: "/",
   admin: {
     overview: "/admin",
+    upload: "/admin/upload",
+    khoaHocDetail: (slug: string) => `/admin/khoa-hoc/${slug}`,
   },
 };

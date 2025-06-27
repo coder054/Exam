@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "./../lib/auth-client";
 import type { ReactNode } from "react";
-import LoadingPage from "~/app/loading";
+// import LoadingPage from "~/app/loading";
 
 export default function GuestGuardClient({
   children,

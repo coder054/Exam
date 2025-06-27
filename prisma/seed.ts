@@ -19,6 +19,7 @@ async function main() {
       mota: "Khoa van bang 2 tuyen moi",
       namTuyenSinh: 2025,
       khoaTuyenSinh: "Khóa 2025",
+      slug: "van-bang-2-tuyen-moi",
     },
   });
 
@@ -28,6 +29,8 @@ async function main() {
       mota: "Khoa D57 tuyen hoc sinh THPT",
       namTuyenSinh: 2025,
       khoaTuyenSinh: "Khóa 2025",
+
+      slug: "d57-tuyen-hs-thpt",
     },
   });
 
