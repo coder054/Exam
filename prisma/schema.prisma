@@ -25,6 +25,7 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
+  role Role @default(ADMIN) 
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]
@@ -134,4 +135,9 @@ enum PhuongThuc {
 enum KetQua {
   PASSED
   NOT_PASSED
+}
+
+enum Role {
+  USER
+  ADMIN
 }
