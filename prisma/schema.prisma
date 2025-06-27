@@ -81,12 +81,11 @@ model Verification {
 
 model KyThi {
   id             Int         @id @default(autoincrement())
-  name           String
-  description    String
-  admissionYear  Int         // Năm tuyển sinh
-  admissionBatch String      // Khóa tuyển sinh
+  ten           String
+  mota    String
+  namTuyenSinh   Int         // Năm tuyển sinh
+  khoaTuyenSinh  String      // Khóa tuyển sinh
   applications   Application[] // Danh sách đăng ký của thí sinh
-
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 }

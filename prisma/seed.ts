@@ -10,19 +10,19 @@ async function main() {
   // Tạo kỳ thi
   const kyThiVB2TuyenMoi = await db.kyThi.create({
     data: {
-      name: "Khoa van bang 2 tuyen moi",
-      description: "Khoa van bang 2 tuyen moi",
-      admissionYear: 2025,
-      admissionBatch: "Khóa 2025",
+      ten: "Khoa van bang 2 tuyen moi",
+      mota: "Khoa van bang 2 tuyen moi",
+      namTuyenSinh: 2025,
+      khoaTuyenSinh: "Khóa 2025",
     },
   });
 
   const kyThiD57TuyenHSTHPT = await db.kyThi.create({
     data: {
-      name: "Khoa D57 tuyen hoc sinh THPT",
-      description: "Khoa D57 tuyen hoc sinh THPT",
-      admissionYear: 2025,
-      admissionBatch: "Khóa 2025",
+      ten: "Khoa D57 tuyen hoc sinh THPT",
+      mota: "Khoa D57 tuyen hoc sinh THPT",
+      namTuyenSinh: 2025,
+      khoaTuyenSinh: "Khóa 2025",
     },
   });
 
