@@ -112,8 +112,8 @@ model Application {
   diemCong       Int?
   diemBaiThiTuLuan1  Int?
   diemBaiThiTuLuan2  Int?
+  maToHop    String?
   maBaiThi           String?
-  testScore      Float?
   tongDiemXetTuyen Float?
   ketQua         KetQua?
 
