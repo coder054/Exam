@@ -79,7 +79,7 @@ model Verification {
   @@map("verification")
 }
 
-model Exam {
+model KyThi {
   id             Int         @id @default(autoincrement())
   name           String
   description    String
@@ -91,41 +91,48 @@ model Exam {
   updatedAt      DateTime    @updatedAt
 }
 
-model Candidate {
+model ThiSinh {
   id             Int         @id @default(autoincrement())
-  fullName       String
-  examNumber     String      @unique // Số báo danh duy nhất
-  nationalId     String      @unique // CCCD duy nhất
+  hoTen       String
+  soBaoDanh     String      @unique // Số báo danh duy nhất
+  CCCD     String      @unique // CCCD duy nhất
   applications   Application[]
-
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 }
 
 model Application {
   id             Int         @id @default(autoincrement())
-  candidateId    Int
+  soThuTu        Int
+  thiSinhId      Int
+  nganh          String
+  vung           String
   examId         Int
-  method         ExamMethod  // Phương thức 1 hoặc 2
+  phuongThuc     PhuongThuc  // Phương thức 1 hoặc 2 hoac 3
+  diemCong       Int?
+  diemBaiThiTuLuan1  Int?
+  diemBaiThiTuLuan2  Int?
+  maBaiThi           String?
   testScore      Float?
-  admissionScore Float?
-  result         Result?
+  tongDiemXetTuyen Float?
+  ketQua         KetQua?
 
-  candidate      Candidate   @relation(fields: [candidateId], references: [id])
-  exam           Exam        @relation(fields: [examId], references: [id])
+  candidate      ThiSinh   @relation(fields: [thiSinhId], references: [id])
+  kyThi           KyThi        @relation(fields: [examId], references: [id])
 
   createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  updatedAt      DateTime    @updatedAt  
 
-  @@unique([candidateId, examId, method]) // Một người chỉ được đăng ký 1 lần/mỗi phương thức/kỳ thi
+  @@unique([thiSinhId, examId, phuongThuc]) // Một người chỉ được đăng ký 1 lần/mỗi phương thức/kỳ thi
 }
 
-enum ExamMethod {
+enum PhuongThuc {
   METHOD_1
   METHOD_2
+  METHOD_3
 }
 
-enum Result {
+enum KetQua {
   PASSED
   NOT_PASSED
 }
