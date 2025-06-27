@@ -179,21 +179,36 @@ export async function uploadExcel(
       const isAppExisted = app !== null;
       if (isAppExisted) {
       } else {
+        const getValueOrNull = (value: any, isNumber: boolean) => {
+          if (!value) {
+            return null;
+          }
+          if (isNumber) {
+            return parseInt(value);
+          }
+          return value;
+        };
         await db.application.create({
           data: {
-            nganh: item[keys.nganh],
+            nganh: getValueOrNull(item[keys.nganh], true),
             phuongThuc: phuongThuc,
-            soThuTu: item[keys.stt],
-            vung: item[keys.vung],
-            thiSinhId: thiSinhId,
-            kyThiId: parseInt(kyThiId),
-            diemCong: item[keys.diemCong],
-            diemBaiThiTuLuan1: item[keys.diemBaiThiTuLuan1],
-            diemBaiThiTuLuan2: item[keys.diemBaiThiTuLuan2],
-            maToHop: item[keys.maToHop],
-            maBaiThi: item[keys.maBaiThi],
-            tongDiemXetTuyen: item[keys.tongDiemXetTuyen],
-            ketQua: item[keys.ketQua],
+            soThuTu: getValueOrNull(item[keys.stt], true),
+            vung: getValueOrNull(item[keys.vung], true),
+            thiSinhId: getValueOrNull(thiSinhId, true),
+            kyThiId: getValueOrNull(kyThiId, true),
+            diemCong: getValueOrNull(item[keys.diemCong], true),
+            diemBaiThiTuLuan1: getValueOrNull(
+              item[keys.diemBaiThiTuLuan1],
+              true,
+            ),
+            diemBaiThiTuLuan2: getValueOrNull(
+              item[keys.diemBaiThiTuLuan2],
+              true,
+            ),
+            maToHop: getValueOrNull(item[keys.maToHop], false),
+            maBaiThi: getValueOrNull(item[keys.maBaiThi], false),
+            tongDiemXetTuyen: getValueOrNull(item[keys.tongDiemXetTuyen], true),
+            ketQua: item[keys.ketQua] === "TT" ? "PASSED" : "NOT_PASSED",
           },
         });
       }
