@@ -105,9 +105,9 @@ model Application {
   id             Int         @id @default(autoincrement())
   soThuTu        Int
   thiSinhId      Int
-  nganh          String
-  vung           String
-  examId         Int
+  nganh          Int
+  vung           Int
+  kyThiId        Int
   phuongThuc     PhuongThuc  // Phương thức 1 hoặc 2 hoac 3
   diemCong       Int?
   diemBaiThiTuLuan1  Int?
@@ -118,12 +118,12 @@ model Application {
   ketQua         KetQua?
 
   candidate      ThiSinh   @relation(fields: [thiSinhId], references: [id])
-  kyThi           KyThi        @relation(fields: [examId], references: [id])
+  kyThi           KyThi        @relation(fields: [kyThiId], references: [id])
 
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt  
 
-  @@unique([thiSinhId, examId, phuongThuc]) // Một người chỉ được đăng ký 1 lần/mỗi phương thức/kỳ thi
+  @@unique([thiSinhId, kyThiId, phuongThuc]) // Một người chỉ được đăng ký 1 lần/mỗi phương thức/kỳ thi
 }
 
 enum PhuongThuc {
