@@ -25,27 +25,35 @@ export default async function DanhSachDuThi({
         <TableCaption>{caption}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px] border text-right">STT</TableHead>
+            <TableHead className="border text-right">STT</TableHead>
             <TableHead className="border text-right">So Bao Danh</TableHead>
             <TableHead className="border text-right">CCCD</TableHead>
             <TableHead className="border text-right">Nganh</TableHead>
             <TableHead className="border text-right">Vung</TableHead>
-            <TableHead className="border text-right">Phuong Thuc 1</TableHead>
-            <TableHead className="border text-right">Phuong Thuc 2</TableHead>
-            <TableHead className="border text-right">Phuong Thuc 3</TableHead>
+            <TableHead className="border text-center">
+              Phuong <br />
+              Thuc 1
+            </TableHead>
+            <TableHead className="border text-center">
+              Phuong <br />
+              Thuc 2
+            </TableHead>
+            <TableHead className="border text-center">
+              Phuong <br />
+              Thuc 3
+            </TableHead>
+            <TableHead className="border text-right">Diem Cong</TableHead>
             <TableHead className="border text-right">
-              Diem Cong cua thi sinh
+              Diem bai <br /> thi tu luan 1
             </TableHead>
             <TableHead className="border text-right">
-              Diem bai thi tu luan 1
-            </TableHead>
-            <TableHead className="border text-right">
-              Diem bai thi tu luan 2
+              Diem bai <br />
+              thi tu luan 2
             </TableHead>
             <TableHead className="border text-right">ma to hop</TableHead>
             <TableHead className="border text-right">ma bai thi</TableHead>
-            <TableHead className="border text-right">
-              tong diem xet tuyen
+            <TableHead className="w-[100px] border text-right">
+              tong diem <br /> xet tuyen
             </TableHead>
             <TableHead className="border text-right">ket qua</TableHead>
           </TableRow>
@@ -53,7 +61,7 @@ export default async function DanhSachDuThi({
         <TableBody>
           {applications.map((item) => (
             <TableRow key={item.id}>
-              <TableCell className="w-[100px] border text-right">
+              <TableCell className="border text-right">
                 {item.soThuTu}
               </TableCell>
               <TableCell className="border text-right">
@@ -64,13 +72,13 @@ export default async function DanhSachDuThi({
               </TableCell>
               <TableCell className="border text-right">{item.nganh}</TableCell>
               <TableCell className="border text-right">{item.vung}</TableCell>
-              <TableCell className="border text-right">
+              <TableCell className="border text-center">
                 {item.phuongThuc === "METHOD_1" ? "x" : ""}
               </TableCell>
-              <TableCell className="border text-right">
+              <TableCell className="border text-center">
                 {item.phuongThuc === "METHOD_2" ? "x" : ""}
               </TableCell>
-              <TableCell className="border text-right">
+              <TableCell className="border text-center">
                 {item.phuongThuc === "METHOD_3" ? "x" : ""}
               </TableCell>
               <TableCell className="border text-right">
