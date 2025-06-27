@@ -1,0 +1,102 @@
+import type { TDanhSachDuThi } from "~/server/actions/khoahoc.actions";
+
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
+
+export default async function DanhSachDuThi({
+  fetchFn,
+}: {
+  fetchFn: () => Promise<TDanhSachDuThi>;
+}) {
+  const applications = await fetchFn();
+
+  return (
+    <>
+      <Table>
+        <TableCaption>Danh sach du thi khoa hoc VB2 tuyen moi.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px] border text-right">STT</TableHead>
+            <TableHead className="border text-right">So Bao Danh</TableHead>
+            <TableHead className="border text-right">CCCD</TableHead>
+            <TableHead className="border text-right">Nganh</TableHead>
+            <TableHead className="border text-right">Vung</TableHead>
+            <TableHead className="border text-right">Phuong Thuc 1</TableHead>
+            <TableHead className="border text-right">Phuong Thuc 2</TableHead>
+            <TableHead className="border text-right">Phuong Thuc 3</TableHead>
+            <TableHead className="border text-right">
+              Diem Cong cua thi sinh
+            </TableHead>
+            <TableHead className="border text-right">
+              Diem bai thi tu luan 1
+            </TableHead>
+            <TableHead className="border text-right">
+              Diem bai thi tu luan 2
+            </TableHead>
+            <TableHead className="border text-right">ma to hop</TableHead>
+            <TableHead className="border text-right">ma bai thi</TableHead>
+            <TableHead className="border text-right">
+              tong diem xet tuyen
+            </TableHead>
+            <TableHead className="border text-right">ket qua</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {applications.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell className="w-[100px] border text-right">
+                {item.soThuTu}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.candidate.soBaoDanh}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.candidate.CCCD}
+              </TableCell>
+              <TableCell className="border text-right">{item.nganh}</TableCell>
+              <TableCell className="border text-right">{item.vung}</TableCell>
+              <TableCell className="border text-right">
+                {item.phuongThuc === "METHOD_1" ? "x" : ""}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.phuongThuc === "METHOD_2" ? "x" : ""}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.phuongThuc === "METHOD_3" ? "x" : ""}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.diemCong}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.diemBaiThiTuLuan1}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.diemBaiThiTuLuan2}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.maToHop}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.maBaiThi}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.tongDiemXetTuyen}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.ketQua === "PASSED" ? "TT" : "KTT"}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>{" "}
+    </>
+  );
+}
