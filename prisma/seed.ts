@@ -1,11 +1,11 @@
 import { db } from "~/server/db";
 
 async function main() {
-  await db.user.deleteMany();
-  await db.account.deleteMany();
-  await db.post.deleteMany();
-  await db.session.deleteMany();
-  await db.verification.deleteMany();
+  // await db.user.deleteMany();
+  // await db.account.deleteMany();
+  // await db.post.deleteMany();
+  // await db.session.deleteMany();
+  // await db.verification.deleteMany();
   await db.application.deleteMany();
   await db.thiSinh.deleteMany();
   await db.kyThi.deleteMany();
