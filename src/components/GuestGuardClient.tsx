@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "./../lib/auth-client";
 import type { ReactNode } from "react";
+import LoadingPage from "~/app/loading";
 
 export default function GuestGuardClient({
   children,
@@ -24,7 +25,7 @@ export default function GuestGuardClient({
   }, [loading, session, router]);
 
   if (loading) {
-    return <div>Loading auth status...</div>;
+    return <LoadingPage />;
   }
 
   // Don't show anything (not even 'unauthorized') while redirecting

@@ -5,20 +5,22 @@ import { Label } from "~/components/ui/label";
 import { signUpDefaultValues } from "~/constants";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useFormStatus } from "react-dom";
 import { authClient } from "~/lib/auth-client";
+import { useState } from "react";
 
 const SignUpForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({ message: "" });
+
   const { data: session } = authClient.useSession();
 
   const SignUpButton = () => {
-    const { pending } = useFormStatus();
     return (
-      <Button disabled={pending} className="w-full" variant="default">
-        {pending ? "Submitting..." : "Sign Up"}
+      <Button disabled={loading} className="w-full" variant="default">
+        {loading ? "Submitting..." : "Sign Up"}
       </Button>
     );
   };
@@ -35,15 +37,22 @@ const SignUpForm = () => {
         const email = (formData.get("email") as string) || "";
         const password = (formData.get("password") as string) || "";
 
-        await authClient.signUp.email(
+        setLoading(true);
+        const { error } = await authClient.signUp.email(
           {
             email, // user email address
             password, // user password -> min 8 characters by default
             name, // user display name
             callbackURL: "/dashboard", // A URL to redirect to after the user verifies their email (optional)
           },
-          {},
+          {
+            onResponse() {
+              setLoading(false);
+            },
+          },
         );
+
+        setError({ message: error?.message || "" });
       }}
     >
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
@@ -91,6 +100,10 @@ const SignUpForm = () => {
             defaultValue={signUpDefaultValues.confirmPassword}
             autoComplete="current-password"
           />
+        </div>
+
+        <div className=" ">
+          {error.message && <div className="text-red-400">{error.message}</div>}
         </div>
         <div>
           <SignUpButton />

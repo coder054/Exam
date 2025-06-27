@@ -18,6 +18,6 @@ export const ROUTES = {
   signUp: "/sign-up",
   home: "/",
   admin: {
-    overview: "/admin/",
+    overview: "/admin",
   },
 };

@@ -25,7 +25,7 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
-  role Role @default(ADMIN) 
+  role Role @default(USER) 
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]

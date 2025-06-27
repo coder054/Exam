@@ -1,3 +1,5 @@
+import AuthGuardClient from "~/components/AuthGuardClient";
+
 export default function PageAdmin() {
-  return <>Admin</>;
+  return <AuthGuardClient>admin</AuthGuardClient>;
 }

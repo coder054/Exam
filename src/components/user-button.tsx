@@ -60,17 +60,6 @@ export default function UserButton() {
             </div>
           </DropdownMenuLabel>
 
-          <DropdownMenuItem>
-            <Link className="w-full" href="/user/profile">
-              User Profile
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link className="w-full" href="/user/orders">
-              Order History
-            </Link>
-          </DropdownMenuItem>
-
           {(session?.user as any).role === "ADMIN" && (
             <DropdownMenuItem>
               <Link className="w-full" href={ROUTES.admin.overview}>

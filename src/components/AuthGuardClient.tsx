@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "./../lib/auth-client";
 import type { ReactNode } from "react";
+import { ROUTES } from "~/constants";
+import LoadingPage from "~/app/loading";
 
 export default function AuthGuardClient({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -15,12 +17,12 @@ export default function AuthGuardClient({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!loading && !session?.user) {
-      router.push("/login");
+      router.push(ROUTES.signIn);
     }
   }, [loading, session, router]);
 
   if (loading) {
-    return <div>Loading auth status...</div>;
+    return <LoadingPage />;
   }
 
   // Don't show anything (not even 'unauthorized') while redirecting

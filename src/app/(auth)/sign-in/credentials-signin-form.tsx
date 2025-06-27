@@ -1,7 +1,5 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
-
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -10,15 +8,17 @@ import { ROUTES, signInDefaultValues } from "~/constants";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { authClient } from "~/lib/auth-client";
+import { useState } from "react";
 const CredentialsSignInForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || ROUTES.home;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({ message: "" });
 
   const SignInButton = () => {
-    const { pending } = useFormStatus();
     return (
-      <Button className="w-full" variant={"default"} disabled={pending}>
-        {pending ? "Signing in ..." : "Sign in with credentials"}
+      <Button className="w-full" variant={"default"} disabled={loading}>
+        {loading ? "Signing in ..." : "Sign in with credentials"}
       </Button>
     );
   };
@@ -30,6 +30,7 @@ const CredentialsSignInForm = () => {
         const formData = new FormData(form);
         const email = (formData.get("email") as string) || "";
         const password = (formData.get("password") as string) || "";
+        setLoading(true);
         const { data, error } = await authClient.signIn.email(
           {
             /**
@@ -43,7 +44,7 @@ const CredentialsSignInForm = () => {
             /**
              * A URL to redirect to after the user verifies their email (optional)
              */
-            callbackURL: ROUTES.home,
+            callbackURL: ROUTES.admin.overview,
             /**
              * remember the user session after the browser is closed.
              * @default true
@@ -52,8 +53,20 @@ const CredentialsSignInForm = () => {
           },
           {
             //callbacks
+            onSuccess() {
+              console.log("aaa on success");
+            },
+            onResponse() {
+              console.log("aaa on response");
+
+              setLoading(false);
+            },
+            onError() {
+              console.log("aaa on error");
+            },
           },
         );
+        setError({ message: error?.message || "" });
         console.log(data, error);
       }}
     >
@@ -80,6 +93,9 @@ const CredentialsSignInForm = () => {
             defaultValue={signInDefaultValues.password}
             autoComplete="current-password"
           />
+        </div>
+        <div className=" ">
+          {error.message && <div className="text-red-400">{error.message}</div>}
         </div>
         <div>
           <SignInButton></SignInButton>
