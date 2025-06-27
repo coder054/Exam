@@ -26,6 +26,16 @@ export default function DanhSachDuThi({
             <TableHead className="border text-right">STT</TableHead>
             <TableHead className="border text-right">So Bao Danh</TableHead>
             <TableHead className="border text-right">CCCD</TableHead>
+            <TableHead className="border text-right">
+              Nam <br /> tuyen
+              <br />
+              sinh{" "}
+            </TableHead>
+            <TableHead className="border text-right">
+              Khoa tuyen
+              <br />
+              sinh{" "}
+            </TableHead>
             <TableHead className="border text-right">Nganh</TableHead>
             <TableHead className="border text-right">Vung</TableHead>
             <TableHead className="border text-center">
@@ -42,14 +52,19 @@ export default function DanhSachDuThi({
             </TableHead>
             <TableHead className="border text-right">Diem Cong</TableHead>
             <TableHead className="border text-right">
-              Diem bai <br /> thi tu luan 1
+              Diem bai <br /> thi tu
+              <br /> luan 1
             </TableHead>
             <TableHead className="border text-right">
               Diem bai <br />
-              thi tu luan 2
+              thi tu <br /> luan 2
             </TableHead>
-            <TableHead className="border text-right">ma to hop</TableHead>
-            <TableHead className="border text-right">ma bai thi</TableHead>
+            <TableHead className="border text-right">
+              ma to <br /> hop
+            </TableHead>
+            <TableHead className="border text-right">
+              ma bai <br /> thi
+            </TableHead>
             <TableHead className="w-[100px] border text-right">
               tong diem <br /> xet tuyen
             </TableHead>
@@ -67,6 +82,12 @@ export default function DanhSachDuThi({
               </TableCell>
               <TableCell className="border text-right">
                 {item.candidate.CCCD}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.kyThi.namTuyenSinh}
+              </TableCell>
+              <TableCell className="border text-right">
+                {item.kyThi.khoaTuyenSinh}
               </TableCell>
               <TableCell className="border text-right">{item.nganh}</TableCell>
               <TableCell className="border text-right">{item.vung}</TableCell>

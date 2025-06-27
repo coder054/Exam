@@ -70,7 +70,7 @@ export default function FormTraCuuDiemThi({
               nhap so bao danh:{" "}
             </Label>
 
-            <Input name="sbd" id="sbd" type="text" />
+            <Input defaultValue={"ANHVB037"} name="sbd" id="sbd" type="text" />
           </div>{" "}
           <div className="mt-4">
             <Button disabled={isPending} type="submit" className=" ">
