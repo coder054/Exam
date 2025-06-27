@@ -25,7 +25,8 @@ export default function GuestGuardClient({
   }, [loading, session, router]);
 
   if (loading) {
-    return <LoadingPage />;
+    // return <LoadingPage />;
+    return <></>;
   }
 
   // Don't show anything (not even 'unauthorized') while redirecting

@@ -2,13 +2,14 @@
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { signUpDefaultValues } from "~/constants";
+import { ROUTES, signUpDefaultValues } from "~/constants";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "~/lib/auth-client";
 import { useState } from "react";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
@@ -48,6 +49,9 @@ const SignUpForm = () => {
           {
             onResponse() {
               setLoading(false);
+            },
+            onSuccess() {
+              router.push(ROUTES.admin.overview);
             },
           },
         );
@@ -90,7 +94,9 @@ const SignUpForm = () => {
             autoComplete="current-password"
           />
         </div>
-        <div>
+        {/*
+
+        <div className="hidden">
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             id="confirmPassword"
@@ -101,6 +107,7 @@ const SignUpForm = () => {
             autoComplete="current-password"
           />
         </div>
+      */}
 
         <div className=" ">
           {error.message && <div className="text-red-400">{error.message}</div>}
