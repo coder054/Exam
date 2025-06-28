@@ -72,13 +72,26 @@ export default function UserButton() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 console.log("aaa click sign out");
-                await authClient.signOut({
-                  fetchOptions: {
-                    onSuccess: () => {
-                      router.push(ROUTES.signIn); // redirect to login page
+                try {
+                  const { error, data } = await authClient.signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        router.push(ROUTES.signIn); // redirect to login page
+                        console.log("aaa on success");
+                      },
+                      onError(context) {
+                        console.log("aaa onError", context);
+                      },
+                      onResponse(context) {
+                        console.log("aaa on response", context);
+                      },
                     },
-                  },
-                });
+                  });
+                  console.log("aaa data ", data);
+                  console.log("aaa error", error);
+                } catch (err) {
+                  console.log("aaa err", err);
+                }
               }}
               className="w-full"
             >
