@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AuthGuardClient from "~/components/AuthGuardClient";
 import UserButton from "~/components/user-button";
 import { APP_NAME, ROUTES } from "~/constants";
 
@@ -9,7 +10,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <AuthGuardClient>
       <div className="flex flex-col">
         <div className="container mx-auto border-b">
           <div className="flex h-16 items-center px-4">
@@ -31,6 +32,6 @@ export default async function AdminLayout({
           {children}
         </div>
       </div>
-    </>
+    </AuthGuardClient>
   );
 }

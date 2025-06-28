@@ -1,12 +1,11 @@
 import Link from "next/link";
-import AuthGuardClient from "~/components/AuthGuardClient";
 
 import { Card, CardHeader, CardContent } from "~/components/ui/card";
 import { ROUTES } from "~/constants";
 
 export default function PageAdmin() {
   return (
-    <AuthGuardClient>
+    <>
       <Card className=" ">
         <CardHeader>Admin</CardHeader>
         <CardContent className=" ">
@@ -24,6 +23,6 @@ export default function PageAdmin() {
           </ul>
         </CardContent>
       </Card>
-    </AuthGuardClient>
+    </>
   );
 }

@@ -23,7 +23,7 @@ export default function AuthGuardClient({ children }: { children: ReactNode }) {
     if (!loading && role !== "ADMIN") {
       router.push(ROUTES.home);
     }
-  }, [loading, session, router]);
+  }, [loading, session, router, role]);
 
   if (loading) {
     return null;
