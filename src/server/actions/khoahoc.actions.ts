@@ -236,7 +236,6 @@ export async function createKhoaHoc(
 ) {
   console.log("aaa data", data);
   try {
-    await new Promise((res) => setTimeout(res, 5000));
     await requiredAdmin();
 
     await db.kyThi.create({
