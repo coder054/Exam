@@ -63,6 +63,14 @@ export default function UserButton() {
             </div>
           </DropdownMenuLabel>
 
+          {(session?.user as any)?.role === "ADMIN" && (
+            <DropdownMenuItem className="mb-1">
+              <Link className=" " href={ROUTES.admin.overview}>
+                Vao Trang Admin
+              </Link>
+            </DropdownMenuItem>
+          )}
+
           <DropdownMenuItem className="mb-1 p-0">
             <form
               onSubmit={async (e) => {

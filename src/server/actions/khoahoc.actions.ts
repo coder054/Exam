@@ -272,3 +272,13 @@ export const requiredAdmin = async () => {
     throw new Error("You need to be an Admin");
   }
 };
+
+export const deleteKythi = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  await db.kyThi.delete({
+    where: {
+      id: parseInt(id),
+    },
+  });
+  revalidatePath(ROUTES.admin.listKhoaHoc);
+};
