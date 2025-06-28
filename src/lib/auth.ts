@@ -18,7 +18,9 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        required: true,
+        required: false, // chi can false thi useSession van nhan duoc role field
+        // neu truong nay la true thi khi sign-up better auth se bat ta truyen
+        // vao role (mac du prisma da co default), nen chi can false la ok
         fieldName: "role",
       },
     },
