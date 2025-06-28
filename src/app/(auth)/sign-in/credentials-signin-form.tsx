@@ -61,8 +61,8 @@ const CredentialsSignInForm = () => {
 
               setLoading(false);
             },
-            onError() {
-              console.log("aaa on error");
+            onError(error) {
+              console.log("aaa on error", error);
             },
           },
         );
