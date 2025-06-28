@@ -63,7 +63,7 @@ export default function UserButton() {
           {(session?.user as any).role === "ADMIN" && (
             <DropdownMenuItem>
               <Link className="w-full" href={ROUTES.admin.overview}>
-                Admin
+                Adminnnn
               </Link>
             </DropdownMenuItem>
           )}
@@ -71,6 +71,7 @@ export default function UserButton() {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
+                console.log("aaa click sign out");
                 await authClient.signOut({
                   fetchOptions: {
                     onSuccess: () => {
@@ -82,6 +83,7 @@ export default function UserButton() {
               className="w-full"
             >
               <Button
+                type="submit"
                 className="h-4 w-full justify-start px-2 py-4"
                 variant="ghost"
               >
