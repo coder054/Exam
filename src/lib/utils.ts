@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -41,4 +42,20 @@ export const formatError = (error: unknown): string => {
       : // @ts-ignore
         JSON.stringify(error.message);
   }
+};
+
+export const toastt = ({
+  message,
+  success,
+}: {
+  message: string;
+  success: boolean;
+}) => {
+  let method: "success" | "error";
+  if (success) {
+    method = "success";
+  } else {
+    method = "error";
+  }
+  return toast[method](message);
 };

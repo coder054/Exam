@@ -3,6 +3,13 @@
 import { read, utils } from "xlsx";
 import { db } from "../db";
 import { formatError } from "~/lib/utils";
+import type z from "zod";
+import type { formSchemaAddKhoaHoc } from "~/app/admin/khoa-hoc/new/form-add-khoa-hoc";
+import { auth } from "~/lib/auth";
+import { headers } from "next/headers";
+import type { User } from "@prisma/client";
+import { ROUTES } from "~/constants";
+import { revalidatePath } from "next/cache";
 
 export type TDanhSachDuThi = Awaited<
   ReturnType<typeof getApplicationsByKyThiId>
@@ -223,3 +230,45 @@ export async function uploadExcel(
     };
   }
 }
+
+export async function createKhoaHoc(
+  data: z.infer<typeof formSchemaAddKhoaHoc>,
+) {
+  console.log("aaa data", data);
+  try {
+    await new Promise((res) => setTimeout(res, 5000));
+    await requiredAdmin();
+
+    await db.kyThi.create({
+      data: {
+        khoaTuyenSinh: data.khoaTuyenSinh,
+        mota: data.mota,
+        namTuyenSinh: parseInt(data.namTuyenSinh),
+        slug: data.slug,
+        ten: data.ten,
+      },
+    });
+
+    revalidatePath(ROUTES.admin.listKhoaHoc);
+
+    return {
+      success: true,
+      message: "tao khoa hoc thanh cong",
+      redirectTo: ROUTES.admin.listKhoaHoc,
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+export const requiredAdmin = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(), // you need to pass the headers object.
+  });
+  // xxxx
+  const adminRole: User["role"] = "ADMIN";
+
+  if (session?.user?.role !== adminRole) {
+    throw new Error("You need to be an Admin");
+  }
+};
