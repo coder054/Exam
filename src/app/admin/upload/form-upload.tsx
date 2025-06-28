@@ -67,7 +67,7 @@ export default function FormUpload({ listKyThi }: { listKyThi: KyThi[] }) {
           </div>
           <div className="mt-4">
             <Button disabled={isPending} type="submit" className=" ">
-              Tra cuu
+              Upload
             </Button>
           </div>
           {actionState.errors.message ? (

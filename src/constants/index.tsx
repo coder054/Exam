@@ -21,5 +21,7 @@ export const ROUTES = {
     overview: "/admin",
     upload: "/admin/upload",
     khoaHocDetail: (slug: string) => `/admin/khoa-hoc/${slug}`,
+    listKhoaHoc: "/admin/khoa-hoc",
+    addKhoaHoc: "/admin/khoa-hoc/new",
   },
 };

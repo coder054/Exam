@@ -5,18 +5,13 @@ import { db } from "../db";
 import { formatError } from "~/lib/utils";
 
 export type TDanhSachDuThi = Awaited<
-  ReturnType<typeof getApplicationsByKyThiSlug>
+  ReturnType<typeof getApplicationsByKyThiId>
 >;
 
-export async function getApplicationsByKyThiSlug(slug: string) {
-  const kyThi = await db.kyThi.findFirst({
-    where: {
-      slug,
-    },
-  });
+export async function getApplicationsByKyThiId(id: number) {
   const applications = await db.application.findMany({
     where: {
-      kyThiId: kyThi?.id,
+      kyThiId: id,
     },
     include: {
       candidate: true, // ThiSinh

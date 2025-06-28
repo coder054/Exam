@@ -57,16 +57,12 @@ export default function UserButton() {
               <p className="text-muted-foreground text-xs leading-none">
                 {session.user?.email}
               </p>
+              <p className="text-muted-foreground text-xs leading-none">
+                Role: {(session?.user as any)?.role}
+              </p>
             </div>
           </DropdownMenuLabel>
 
-          {(session?.user as any).role === "ADMIN" && (
-            <DropdownMenuItem>
-              <Link className="w-full" href={ROUTES.admin.overview}>
-                Adminnnn
-              </Link>
-            </DropdownMenuItem>
-          )}
           <DropdownMenuItem className="mb-1 p-0">
             <form
               onSubmit={async (e) => {
@@ -97,8 +93,8 @@ export default function UserButton() {
             >
               <Button
                 type="submit"
-                className="h-4 w-full justify-start px-2 py-4"
-                variant="ghost"
+                className="h-4 w-full cursor-pointer justify-start px-2 py-4"
+                variant="outline"
               >
                 Sign Out
               </Button>
