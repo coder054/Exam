@@ -44,7 +44,7 @@ const CredentialsSignInForm = () => {
             /**
              * A URL to redirect to after the user verifies their email (optional)
              */
-            callbackURL: ROUTES.admin.overview,
+            callbackURL: ROUTES.home,
             /**
              * remember the user session after the browser is closed.
              * @default true
@@ -52,13 +52,7 @@ const CredentialsSignInForm = () => {
             rememberMe: false,
           },
           {
-            //callbacks
-            onSuccess() {
-              console.log("aaa on success");
-            },
             onResponse() {
-              console.log("aaa on response");
-
               setLoading(false);
             },
             onError(error) {

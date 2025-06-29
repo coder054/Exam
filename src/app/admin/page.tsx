@@ -2,8 +2,10 @@ import Link from "next/link";
 
 import { Card, CardHeader, CardContent } from "~/components/ui/card";
 import { ROUTES } from "~/constants";
+import { requireAdmin } from "~/lib/requireAdmin";
 
-export default function PageAdmin() {
+export default async function PageAdmin() {
+  await requireAdmin();
   return (
     <>
       <Card className=" ">
@@ -16,12 +18,12 @@ export default function PageAdmin() {
               </Link>
             </li>
             <li className=" ">
-              <Link className=" " href={"/admin/khoa-hoc"}>
+              <Link className=" " href={ROUTES.admin.listKhoaHoc}>
                 Cac ky thi
               </Link>
             </li>
             <li className=" ">
-              <Link className=" " href={"/admin/quan-ly-nguoi-dung"}>
+              <Link className=" " href={ROUTES.admin.users.list}>
                 Quan ly nguoi dung
               </Link>
             </li>

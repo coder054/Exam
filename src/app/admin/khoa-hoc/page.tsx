@@ -8,10 +8,12 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { ROUTES } from "~/constants";
+import { requireAdmin } from "~/lib/requireAdmin";
 import { deleteKythi } from "~/server/actions/khoahoc.actions";
 import { db } from "~/server/db";
 
 export default async function PageKhoaHoc() {
+  await requireAdmin();
   const listKhoaHoc = await db.kyThi.findMany();
   return (
     <Card className=" ">

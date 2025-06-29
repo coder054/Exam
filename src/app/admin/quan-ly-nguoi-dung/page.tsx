@@ -12,8 +12,10 @@ import {
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
 import { ROUTES } from "~/constants";
+import { requireAdmin } from "~/lib/requireAdmin";
 
 export default async function PageQuanLyNguoiDung() {
+  await requireAdmin();
   const users = await db.user.findMany();
 
   return (

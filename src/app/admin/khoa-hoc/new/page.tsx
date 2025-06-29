@@ -1,5 +1,7 @@
+import { requireAdmin } from "~/lib/requireAdmin";
 import FormAddKhoaHoc from "./form-add-khoa-hoc";
 
-export default function PageAddKhoaHoc() {
+export default async function PageAddKhoaHoc() {
+  await requireAdmin();
   return <FormAddKhoaHoc />;
 }
