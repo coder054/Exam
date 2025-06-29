@@ -23,5 +23,9 @@ export const ROUTES = {
     khoaHocDetail: (slug: string) => `/admin/khoa-hoc/${slug}`,
     listKhoaHoc: "/admin/khoa-hoc",
     addKhoaHoc: "/admin/khoa-hoc/new",
+    users: {
+      list: "/admin/quan-ly-nguoi-dung",
+      edit: (id: string) => `/admin/quan-ly-nguoi-dung/${id}/edit`,
+    },
   },
 };

@@ -9,6 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { Button } from "~/components/ui/button";
+import Link from "next/link";
+import { ROUTES } from "~/constants";
 
 export default async function PageQuanLyNguoiDung() {
   const users = await db.user.findMany();
@@ -22,6 +25,7 @@ export default async function PageQuanLyNguoiDung() {
             <TableHead className="border text-right">Ten</TableHead>
             <TableHead className="border text-right">Email</TableHead>
             <TableHead className="border text-right">Role</TableHead>
+            <TableHead className="border text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -30,6 +34,15 @@ export default async function PageQuanLyNguoiDung() {
               <TableCell className="border text-right">{item.name}</TableCell>
               <TableCell className="border text-right">{item.email}</TableCell>
               <TableCell className="border text-right">{item.role}</TableCell>
+              <TableCell className="border text-right">
+                <div className="flex gap-x-2">
+                  <Button asChild className=" ">
+                    <Link className=" " href={ROUTES.admin.users.edit(item.id)}>
+                      Edit
+                    </Link>
+                  </Button>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
