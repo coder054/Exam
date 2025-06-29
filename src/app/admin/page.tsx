@@ -20,6 +20,11 @@ export default function PageAdmin() {
                 Cac ky thi
               </Link>
             </li>
+            <li className=" ">
+              <Link className=" " href={"/admin/quan-ly-nguoi-dung"}>
+                Quan ly nguoi dung
+              </Link>
+            </li>
           </ul>
         </CardContent>
       </Card>
