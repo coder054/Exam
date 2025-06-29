@@ -216,6 +216,8 @@ export async function uploadExcel(
       }
     }
 
+    revalidatePath(ROUTES.home);
+
     return {
       errors: { message: "" },
       data: [],

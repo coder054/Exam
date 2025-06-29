@@ -72,7 +72,7 @@ export default function FormTraCuuDiemThi({
 
             <Input defaultValue={"ANHVB037"} name="sbd" id="sbd" type="text" />
           </div>{" "}
-          <div className="mt-4">
+          <div className="mt-4 mb-4">
             <Button disabled={isPending} type="submit" className=" ">
               Tra cuu
             </Button>
