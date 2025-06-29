@@ -26,6 +26,7 @@ const CredentialsSignInForm = () => {
     <form
       onSubmit={async (e) => {
         e.preventDefault();
+        setError({ message: "" });
         const form = e.currentTarget; // This is correctly typed as HTMLFormElement
         const formData = new FormData(form);
         const email = (formData.get("email") as string) || "";
