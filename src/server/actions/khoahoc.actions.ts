@@ -216,8 +216,6 @@ export async function uploadExcel(
       }
     }
 
-    revalidatePath(ROUTES.home);
-
     return {
       errors: { message: "" },
       data: [],
@@ -251,6 +249,7 @@ export async function createKhoaHoc(
     });
 
     revalidatePath(ROUTES.admin.listKhoaHoc);
+    revalidatePath(ROUTES.home);
 
     return {
       success: true,
