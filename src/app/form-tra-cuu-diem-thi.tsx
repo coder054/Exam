@@ -1,7 +1,8 @@
 "use client";
 import type { KyThi } from "@prisma/client";
 
-import { ClipLoader } from "react-spinners";
+import { AlertCircleIcon, Loader2Icon } from "lucide-react";
+import { Alert, AlertTitle } from "~/components/ui/alert";
 
 import { useState } from "react";
 import DanhSachDuThi from "~/components/DanhSachDuThi";
@@ -106,17 +107,21 @@ export default function FormTraCuuDiemThi({
             )}
           />
           <Button disabled={form.formState.isSubmitting} type="submit">
+            {form.formState.isSubmitting && (
+              <Loader2Icon className="animate-spin" />
+            )}{" "}
             Tra cuu
           </Button>
         </form>
       </Form>
-      <ClipLoader
-        loading={form.formState.isSubmitting}
-        size={50}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      {error && <div className="text-red-400">{error}</div>}
+      {error && (
+        <div className="grid w-full max-w-xl items-start gap-4">
+          <Alert variant="destructive">
+            <AlertCircleIcon />
+            <AlertTitle>{error}</AlertTitle>
+          </Alert>
+        </div>
+      )}
 
       {data.length > 0 && (
         <DanhSachDuThi applications={data || []} caption={""} />
