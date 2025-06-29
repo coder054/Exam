@@ -1,90 +1,126 @@
 "use client";
 import type { KyThi } from "@prisma/client";
-import { startTransition, useActionState } from "react";
+
+import { ClipLoader } from "react-spinners";
+
+import { useState } from "react";
 import DanhSachDuThi from "~/components/DanhSachDuThi";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { getKetQuaThi } from "~/server/actions/khoahoc.actions";
+import { getKetQuaThi2 } from "~/server/actions/khoahoc.actions";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/ui/form";
+
+export const formSchemaSearchKetQua = z.object({
+  sbd: z.string().min(1, "Ban chua nhap so bao danh"),
+  examId: z.string().min(1, "Ban chua chon ky thi"),
+});
 
 export default function FormTraCuuDiemThi({
   listKyThi,
 }: {
   listKyThi: KyThi[];
 }) {
-  const [actionState, action, isPending] = useActionState(getKetQuaThi, {
-    errors: { message: "" },
-    data: [],
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+  const form = useForm<z.infer<typeof formSchemaSearchKetQua>>({
+    resolver: zodResolver(formSchemaSearchKetQua),
+    defaultValues: {
+      sbd: "ANHVB037",
+      examId: "",
+    },
   });
-
-  console.log("aaa data", actionState.data);
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    startTransition(() => {
-      action(formData);
-    });
+  async function onSubmit(values: z.infer<typeof formSchemaSearchKetQua>) {
+    setError("");
+    setData([]);
+    const res = await getKetQuaThi2(values);
+    if (!res.success) {
+      setError(res.message);
+    }
+    setData(res.data || []);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Card className=" ">
-        <CardHeader>
-          <h1 className="text-xl font-bold">Tra cuu diem thi</h1>
-        </CardHeader>
-        <CardContent className=" ">
-          <div className="">
-            <Label htmlFor="kyThiId" className="mb-2">
-              Chọn kỳ thi:{" "}
-            </Label>
-            <Select name="kyThiId">
-              <SelectTrigger name="kyThiId" id="kyThiId" className="w-full">
-                <SelectValue placeholder="Chọn" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {listKyThi.map((item) => {
-                    return (
-                      <SelectItem key={item.id} value={String(item.id)}>
-                        {item.ten}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectGroup>
-              </SelectContent>
-            </Select>{" "}
-          </div>{" "}
-          <div className="mt-4">
-            <Label htmlFor="sbd" className="mb-2">
-              nhap so bao danh:{" "}
-            </Label>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="examId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Chon ky thi</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Chọn" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {listKyThi.map((item) => {
+                      return (
+                        <SelectItem key={item.id} value={String(item.id)}>
+                          {item.ten}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="sbd"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>So Bao Danh</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={form.formState.isSubmitting} type="submit">
+            Tra cuu
+          </Button>
+        </form>
+      </Form>
+      <ClipLoader
+        loading={form.formState.isSubmitting}
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      {error && <div className="text-red-400">{error}</div>}
 
-            <Input defaultValue={"ANHVB037"} name="sbd" id="sbd" type="text" />
-          </div>{" "}
-          <div className="mt-4 mb-4">
-            <Button disabled={isPending} type="submit" className=" ">
-              Tra cuu
-            </Button>
-          </div>
-          {actionState.errors.message ? (
-            <div className="text-red-400">{actionState.errors.message}</div>
-          ) : null}
-          {actionState.data.length > 0 && (
-            <DanhSachDuThi applications={actionState.data || []} caption={""} />
-          )}
-        </CardContent>
-      </Card>
-    </form>
+      {data.length > 0 && (
+        <DanhSachDuThi applications={data || []} caption={""} />
+      )}
+    </>
   );
 }

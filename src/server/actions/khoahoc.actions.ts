@@ -10,6 +10,7 @@ import { headers } from "next/headers";
 import type { User } from "@prisma/client";
 import { ROUTES } from "~/constants";
 import { revalidatePath } from "next/cache";
+import type { formSchemaSearchKetQua } from "~/app/form-tra-cuu-diem-thi";
 
 export type TDanhSachDuThi = Awaited<
   ReturnType<typeof getApplicationsByKyThiId>
@@ -72,10 +73,11 @@ export async function getKetQuaThi(
         kyThi: true, // KyThi
       },
     });
+    console.log("aaa app", app);
 
     return {
       errors: {
-        message: "",
+        message: app?.length === 0 ? "khong co ket qua" : "",
       },
       data: app || [],
     };
@@ -85,6 +87,57 @@ export async function getKetQuaThi(
         message: formatError(error),
       },
       data: [],
+    };
+  }
+}
+export async function getKetQuaThi2(
+  data: z.infer<typeof formSchemaSearchKetQua>,
+): Promise<{
+  message: string;
+  success: boolean;
+  redirectTo?: string;
+  data: any;
+}> {
+  try {
+    const kyThiId = parseInt(data.examId);
+    const sbd = data.sbd;
+
+    const thiSinh = await db.thiSinh.findFirst({
+      where: {
+        soBaoDanh: String(sbd),
+      },
+    });
+    if (!thiSinh) {
+      return {
+        success: false,
+        message: "khong tim thay thi sinh",
+        data: null,
+      };
+    }
+
+    const app = await db.application.findMany({
+      where: {
+        thiSinhId: thiSinh.id,
+        kyThiId: parseInt(String(kyThiId)),
+      },
+
+      include: {
+        candidate: true, // ThiSinh
+        kyThi: true, // KyThi
+      },
+    });
+    console.log("aaa app", app);
+
+    return {
+      message: app?.length === 0 ? "khong co ket qua" : "",
+      success: app?.length === 0 ? false : true,
+      data: app,
+    };
+  } catch (error) {
+    return {
+      message: formatError(error),
+      success: false,
+      data: null,
     };
   }
 }
