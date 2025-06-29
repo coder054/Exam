@@ -23,52 +23,126 @@ export default function DanhSachDuThi({
         <TableCaption>{caption}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="border">STT</TableHead>
-            <TableHead className="border">So Bao Danh</TableHead>
-            <TableHead className="border">CCCD</TableHead>
             <TableHead className="border">
-              Nam <br /> tuyen
-              <br />
-              sinh{" "}
+              <div className="grid grid-rows-3">
+                <div className=" ">STT</div>
+                <div className=" "></div>
+                <div className=" "></div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              Khoa tuyen
-              <br />
-              sinh{" "}
-            </TableHead>
-            <TableHead className="border">Nganh</TableHead>
-            <TableHead className="border">Vung</TableHead>
-            <TableHead className="border">
-              Phuong <br />
-              Thuc 1
+              <div className="grid grid-rows-3">
+                <div className=" ">So bao danh</div>
+                <div className=" "></div>
+                <div className=" "></div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              Phuong <br />
-              Thuc 2
+              <div className="grid grid-rows-3">
+                <div className=" ">CCCD</div>
+                <div className=" "></div>
+                <div className=" "></div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              Phuong <br />
-              Thuc 3
-            </TableHead>
-            <TableHead className="border">Diem Cong</TableHead>
-            <TableHead className="border">
-              Diem bai <br /> thi tu
-              <br /> luan 1
+              <div className="grid grid-rows-3">
+                <div className=" ">Nam</div>
+                <div className=" ">tuyen</div>
+                <div className=" ">sinh</div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              Diem bai <br />
-              thi tu <br /> luan 2
+              <div className="grid grid-rows-3">
+                <div className=" ">Khoa</div>
+                <div className=" ">tuyen</div>
+                <div className=" ">sinh</div>
+              </div>
+            </TableHead>
+
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Nganh</div>
+                <div className=" "></div>
+                <div className=" "></div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              ma to <br /> hop
+              <div className="grid grid-rows-3">
+                <div className=" ">Vung</div>
+                <div className=" "></div>
+                <div className=" "></div>
+              </div>
             </TableHead>
             <TableHead className="border">
-              ma bai <br /> thi
+              <div className="grid grid-rows-3">
+                <div className=" ">Phuong</div>
+                <div className=" ">Thuc</div>
+                <div className=" ">1</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Phuong</div>
+                <div className=" ">Thuc</div>
+                <div className=" ">2</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Phuong</div>
+                <div className=" ">Thuc</div>
+                <div className=" ">3</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Diem</div>
+                <div className=" ">cong</div>
+                <div className=" "></div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Diem bai</div>
+                <div className=" ">thi tu</div>
+                <div className=" ">luan 1</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Diem bai</div>
+                <div className=" ">thi tu</div>
+                <div className=" ">luan 2</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Ma</div>
+                <div className=" ">to</div>
+                <div className=" ">hop</div>
+              </div>
+            </TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Ma</div>
+                <div className=" ">bai</div>
+                <div className=" ">thi</div>
+              </div>
             </TableHead>
             <TableHead className="w-[100px] border">
-              tong diem <br /> xet tuyen
+              <div className="grid grid-rows-3">
+                <div className=" ">Tong</div>
+                <div className=" ">diem xet</div>
+                <div className=" ">tuyen</div>
+              </div>
             </TableHead>
-            <TableHead className="border">ket qua</TableHead>
+            <TableHead className="border">
+              <div className="grid grid-rows-3">
+                <div className=" ">Ket</div>
+                <div className=" ">qua</div>
+                <div className=" "></div>
+              </div>
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
